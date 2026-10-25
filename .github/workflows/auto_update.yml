@@ -1,22 +1,21 @@
 name: Auto Update and Clean Nodes
 
 on:
-  # 1. 设置定时任务：每隔 6 小时自动运行一次 (UTC 时间，可按需调整)
   schedule:
     - cron: '0 */6 * * *'
-  
-  # 2. 允许你随时在网页上手动点击按钮触发运行
   workflow_dispatch:
 
 jobs:
   update-nodes:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: 检查仓库代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4   # 确保这里是 v4
 
       - name: 设置 Python 环境
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5   # 确保这里是 v5
         with:
           python-version: '3.10'
 
@@ -28,5 +27,4 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add ipv4_cleaned.txt
-          # 如果文件有改动才提交，防止无意义的空提交
           git diff --quiet && git diff --cached --quiet || (git commit -m "Auto update cleaned nodes" && git push)
