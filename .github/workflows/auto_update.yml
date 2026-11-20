@@ -2,9 +2,7 @@ name: Auto Update and Clean Nodes
 
 on:
   schedule:
-    - cron: '0 6 * * *'    # UTC 06:00 → BJ时间14:00（下午2点）
-    - cron: '0 14 * * *'   # UTC 14:00 →   时间22:00（晚上10点）
-    - cron: '0 20 * * *'   # UTC 20:00 →   时间04:00（凌晨4点）
+    - cron: '16 20 * * *' # UTC 20:16 →bj时间04:16（凌晨4点16）
 
   workflow_dispatch:
 
